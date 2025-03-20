@@ -64,7 +64,41 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
-	
+		[Header("Footstep Sounds")]
+		[Tooltip("Array of walking footstep sounds")]
+		public AudioClip[] walkingFootstepSounds; // Звуки шагов при ходьбе
+		[Tooltip("Array of running footstep sounds")]
+		public AudioClip[] runningFootstepSounds; // Звуки шагов при беге
+		[Tooltip("Delay between footsteps when walking")]
+		public float walkingFootstepDelay = 0.5f; // Задержка между шагами при ходьбе
+		[Tooltip("Delay between footsteps when running")]
+		public float runningFootstepDelay = 0.3f; // Задержка между шагами при беге
+
+		private AudioSource _audioSource; // Источник звука
+		private float _footstepTimer; // Таймер для отслеживания задержки между шагами
+
+		[Header("Stamina Settings")]
+		[Tooltip("Maximum stamina of the player")]
+		public float maxStamina = 100f; // Максимальная стамина
+		[Tooltip("Current stamina of the player")]
+		public float currentStamina; // Текущая стамина
+		[Tooltip("Stamina depletion rate per second while running")]
+		public float staminaDepletionRate = 10f; // Скорость уменьшения стамины при беге
+		[Tooltip("Stamina regeneration rate per second while not running")]
+		public float staminaRegenerationRate = 5f; // Скорость восстановления стамины
+		[Tooltip("Minimum stamina required to sprint")]
+		public float minStaminaToSprint = 10f; // Минимальная стамина для бега
+
+		[Header("Breathing Sounds")]
+		[Tooltip("Sound to play when stamina is fully depleted")]
+		public AudioClip outOfBreathSound; // Звук одышки
+		[Tooltip("Volume of the out of breath sound")]
+		[Range(0, 1)] public float outOfBreathVolume = 1f; // Громкость звука
+
+		private bool _hasPlayedOutOfBreathSound = false; // Флаг, чтобы звук не воспроизводился повторно
+
+
+			
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		private PlayerInput _playerInput;
 #endif
@@ -105,9 +139,17 @@ namespace StarterAssets
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
 
-			// reset our timeouts on start
-			_jumpTimeoutDelta = JumpTimeout;
-			_fallTimeoutDelta = FallTimeout;
+		// Инициализация аудиоисточника
+		_audioSource = gameObject.AddComponent<AudioSource>();
+		_audioSource.spatialBlend = 1.0f; // 3D-звук
+		_audioSource.playOnAwake = false;
+
+		// Инициализация стамины
+    	currentStamina = maxStamina;
+		// Сброс таймеров
+		_jumpTimeoutDelta = JumpTimeout;
+		_fallTimeoutDelta = FallTimeout;
+		_footstepTimer = 0f;
 		}
 
 		private void Update()
@@ -115,6 +157,7 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			HandleStamina();
 		}
 
 		private void LateUpdate()
@@ -153,29 +196,19 @@ namespace StarterAssets
 
 		private void Move()
 		{
-			// set target speed based on move speed, sprint speed and if sprint is pressed
-			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+			// Установка целевой скорости
+			float targetSpeed = _input.sprint && currentStamina > minStaminaToSprint ? SprintSpeed : MoveSpeed;
 
-			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
-
-			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-			// if there is no input, set the target speed to 0
+			// Если нет ввода, установите целевую скорость на 0
 			if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
-			// a reference to the players current horizontal velocity
+			// Вычисление текущей горизонтальной скорости
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
-			float speedOffset = 0.1f;
-			float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
-
-			// accelerate or decelerate to target speed
-			if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
+			// Ускорение или замедление до целевой скорости
+			if (currentHorizontalSpeed < targetSpeed - 0.1f || currentHorizontalSpeed > targetSpeed + 0.1f)
 			{
-				// creates curved result rather than a linear one giving a more organic speed change
-				// note T in Lerp is clamped, so we don't need to clamp our speed
-				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
-
-				// round speed to 3 decimal places
+				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed, Time.deltaTime * SpeedChangeRate);
 				_speed = Mathf.Round(_speed * 1000f) / 1000f;
 			}
 			else
@@ -183,21 +216,86 @@ namespace StarterAssets
 				_speed = targetSpeed;
 			}
 
-			// normalise input direction
+			// Нормализация направления ввода
 			Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-			// note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-			// if there is a move input rotate player when the player is moving
+			// Если есть ввод, поверните игрока
 			if (_input.move != Vector2.zero)
 			{
-				// move
 				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
 			}
 
-			// move the player
+			// Перемещение игрока
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
+			// Воспроизведение звуков шагов
+			if (Grounded && _speed > 0.1f)
+			{
+				_footstepTimer -= Time.deltaTime;
+				if (_footstepTimer <= 0f)
+				{
+					if (_input.sprint && currentStamina > minStaminaToSprint) // Если игрок бежит
+					{
+						PlayFootstepSound(runningFootstepSounds, runningFootstepDelay);
+					}
+					else // Если игрок идет
+					{
+						PlayFootstepSound(walkingFootstepSounds, walkingFootstepDelay);
+					}
+				}
+			}
+		}
+		private void PlayFootstepSound(AudioClip[] footstepSounds, float delay)
+		{
+			if (footstepSounds.Length > 0 && _audioSource != null)
+			{
+				int index = Random.Range(0, footstepSounds.Length); // Случайный выбор звука
+				_audioSource.PlayOneShot(footstepSounds[index]); // Воспроизведение звука
+				_footstepTimer = delay; // Установка задержки
+			}
 		}
 
+		private void HandleStamina()
+		{
+			if (_input.sprint && _speed > 0.1f && currentStamina > 0) // Если игрок бежит
+			{
+				if (currentStamina > minStaminaToSprint)
+				{
+					currentStamina -= staminaDepletionRate * Time.deltaTime; // Уменьшение стамины
+				}
+				currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina); // Ограничение стамины
+
+				// Сброс флага, если стамина восстановилась выше 0
+				if (currentStamina > 0)
+				{
+					_hasPlayedOutOfBreathSound = false;
+				}
+			}
+			else if (currentStamina < maxStamina) // Если игрок не бежит
+			{
+				currentStamina += staminaRegenerationRate * Time.deltaTime; // Восстановление стамины
+				currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina); // Ограничение стамины
+
+				// Сброс флага, если стамина восстановилась выше 0
+				if (currentStamina > 0)
+				{
+					_hasPlayedOutOfBreathSound = false;
+				}
+			}
+
+			// Если стамина закончилась, игрок не может бежать
+			if (currentStamina <= 0)
+			{
+				_input.sprint = false; // Отключение бега
+
+				// Воспроизведение звука одышки, если он ещё не был воспроизведён
+				if (!_hasPlayedOutOfBreathSound && outOfBreathSound != null)
+				{
+					_audioSource.PlayOneShot(outOfBreathSound, outOfBreathVolume);
+					_hasPlayedOutOfBreathSound = true; // Установка флага, чтобы звук не воспроизводился повторно
+				}
+			}
+		}
 		private void JumpAndGravity()
 		{
 			if (Grounded)

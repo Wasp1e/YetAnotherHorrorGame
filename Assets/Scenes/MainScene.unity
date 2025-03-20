@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: ca562dd5f1df84e45baefbc9a772b718, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -334,6 +334,142 @@ PrefabInstance:
       propertyPath: JumpHeight
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: outOfBreathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f4b0675d2cf0b2645bf39d2289bbd5af, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: outOfBreathVolume
+      value: 0.673
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: minStaminaToSprint
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: runningFootstepDelay
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: staminaDepletionRate
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: walkingFootstepDelay
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: staminaRegenerationRate
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: footstepSounds.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: footstepSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 31bdb9de8d8419b49b993e6b0d6d878b, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: footstepSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 71b9a9f304840d140a45128863f04b03, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: footstepSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6785b277459ea804da528c61a622df45, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: footstepSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f82173eff6a28140a239f50dbf7d3ed, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: footstepSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: a19b03276cfe4f342952462d2923697e, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: footstepSounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: f09310c8813121c4e89999eb418f5bc8, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: footstepSounds.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: a365b404c86824c458580248f1c06127, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: footstepSounds.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: a800663c9e226a141843869e4a88407e, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: runningFootstepSounds.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: walkingFootstepSounds.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: runningFootstepSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: b965f5d4f1b70b4448e583574ae11a89, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: runningFootstepSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 43c923abc7a6f7341ba9255ae589c460, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: runningFootstepSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: d8f084f88c665d94fb3c0fcb5c80ab2a, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: runningFootstepSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: a388b799a684d6e4993ae6745594c0a9, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: runningFootstepSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2d91f0deedddb804682aae62102968da, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: runningFootstepSounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8d72513ebd9853c4a987473cce2a0c03, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: runningFootstepSounds.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: a1d5839050ba53346a91ccc83914bbd6, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: runningFootstepSounds.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 80e2ccdf1fa726b4d8f06b1062b437c8, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: walkingFootstepSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a800663c9e226a141843869e4a88407e, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: walkingFootstepSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 31bdb9de8d8419b49b993e6b0d6d878b, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: walkingFootstepSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 71b9a9f304840d140a45128863f04b03, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: walkingFootstepSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6785b277459ea804da528c61a622df45, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: walkingFootstepSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f82173eff6a28140a239f50dbf7d3ed, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: walkingFootstepSounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: a19b03276cfe4f342952462d2923697e, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: walkingFootstepSounds.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: f09310c8813121c4e89999eb418f5bc8, type: 3}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: walkingFootstepSounds.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: a365b404c86824c458580248f1c06127, type: 3}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
@@ -1520,7 +1656,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 913623073}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!154 &190684970
 TerrainCollider:
@@ -2609,82 +2745,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8733429697405204941, guid: 085961e9024571f4a8f12e4c01440ee6, type: 3}
---- !u!1 &514301173
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 514301174}
-  - component: {fileID: 514301176}
-  - component: {fileID: 514301175}
-  m_Layer: 0
-  m_Name: Terrain (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!4 &514301174
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 514301173}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.203503, y: 3.6103718, z: 4.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 913623073}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!154 &514301175
-TerrainCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 514301173}
-  m_Material: {fileID: 0}
-  m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: ddbf37346ea9b0a4ba0fbf2c6adcf5c8, type: 2}
-  m_EnableTreeColliders: 1
---- !u!218 &514301176
-Terrain:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 514301173}
-  m_Enabled: 1
-  serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: ddbf37346ea9b0a4ba0fbf2c6adcf5c8, type: 2}
-  m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
-  m_TreeCrossFadeLength: 5
-  m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
-  m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
-  m_SplatMapDistance: 1000
-  m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
-  m_DrawHeightmap: 1
-  m_DrawInstanced: 0
-  m_DrawTreesAndFoliage: 1
-  m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 3557cc8524e69a84aa6cd550cfc66717, type: 2}
-  m_BakeLightProbesForTrees: 1
-  m_PreserveTreePrototypeLayers: 0
-  m_DeringLightProbesForTrees: 1
-  m_ScaleInLightmap: 0.0256
-  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
-  m_GroupingID: 0
-  m_RenderingLayerMask: 1
-  m_AllowAutoConnect: 1
 --- !u!1 &532020950
 GameObject:
   m_ObjectHideFlags: 0
@@ -3549,7 +3609,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 826159668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.87, y: 1.44, z: 49.95}
+  m_LocalPosition: {x: 46.87, y: 1.44, z: 50.529}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1249414135}
@@ -4082,7 +4142,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 807566935}
-  - {fileID: 514301174}
   - {fileID: 190684969}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -5342,7 +5401,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 14
-  m_SpotAngle: 71
+  m_SpotAngle: 53.3
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
