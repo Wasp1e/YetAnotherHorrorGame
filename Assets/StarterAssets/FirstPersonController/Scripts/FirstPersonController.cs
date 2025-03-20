@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -197,7 +198,19 @@ namespace StarterAssets
 		private void Move()
 		{
 			// Установка целевой скорости
-			float targetSpeed = _input.sprint && currentStamina > minStaminaToSprint ? SprintSpeed : MoveSpeed;
+			float targetSpeed = MoveSpeed; // По умолчанию скорость ходьбы
+
+			// Если игрок пытается бежать и стамина выше 0, и она не была истощена
+			if (_input.sprint && currentStamina > 0 && !_isExhausted)
+			{
+				targetSpeed = SprintSpeed; // Установка скорости бега
+			}
+
+			// Если стамина была истощена, игрок не может бежать
+			if (_isExhausted)
+			{
+				_input.sprint = false; // Принудительно отключаем бег
+			}
 
 			// Если нет ввода, установите целевую скорость на 0
 			if (_input.move == Vector2.zero) targetSpeed = 0.0f;
@@ -234,7 +247,7 @@ namespace StarterAssets
 				_footstepTimer -= Time.deltaTime;
 				if (_footstepTimer <= 0f)
 				{
-					if (_input.sprint && currentStamina > minStaminaToSprint) // Если игрок бежит
+					if (_input.sprint && currentStamina > 0 && !_isExhausted) // Если игрок бежит
 					{
 						PlayFootstepSound(runningFootstepSounds, runningFootstepDelay);
 					}
@@ -255,18 +268,17 @@ namespace StarterAssets
 			}
 		}
 
+		private bool _isExhausted = false; // Флаг, указывающий, что стамина была полностью истощена
+
 		private void HandleStamina()
 		{
 			if (_input.sprint && _speed > 0.1f && currentStamina > 0) // Если игрок бежит
 			{
-				if (currentStamina > minStaminaToSprint)
-				{
-					currentStamina -= staminaDepletionRate * Time.deltaTime; // Уменьшение стамины
-				}
+				currentStamina -= staminaDepletionRate * Time.deltaTime; // Уменьшение стамины
 				currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina); // Ограничение стамины
 
-				// Сброс флага, если стамина восстановилась выше 0
-				if (currentStamina > 0)
+				// Сброс флага, если стамина восстановилась выше 70
+				if (currentStamina > 70)
 				{
 					_hasPlayedOutOfBreathSound = false;
 				}
@@ -276,16 +288,17 @@ namespace StarterAssets
 				currentStamina += staminaRegenerationRate * Time.deltaTime; // Восстановление стамины
 				currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina); // Ограничение стамины
 
-				// Сброс флага, если стамина восстановилась выше 0
-				if (currentStamina > 0)
+				// Сброс флага, если стамина восстановилась выше 70
+				if (currentStamina > 70)
 				{
 					_hasPlayedOutOfBreathSound = false;
 				}
 			}
 
-			// Если стамина закончилась, игрок не может бежать
+			// Если стамина достигла нуля, включаем флаг истощения
 			if (currentStamina <= 0)
 			{
+				_isExhausted = true;
 				_input.sprint = false; // Отключение бега
 
 				// Воспроизведение звука одышки, если он ещё не был воспроизведён
@@ -294,6 +307,12 @@ namespace StarterAssets
 					_audioSource.PlayOneShot(outOfBreathSound, outOfBreathVolume);
 					_hasPlayedOutOfBreathSound = true; // Установка флага, чтобы звук не воспроизводился повторно
 				}
+			}
+
+			// Если стамина восстановилась до 70%, сбрасываем флаг истощения
+			if (_isExhausted && currentStamina >= 70)
+			{
+				_isExhausted = false;
 			}
 		}
 		private void JumpAndGravity()
