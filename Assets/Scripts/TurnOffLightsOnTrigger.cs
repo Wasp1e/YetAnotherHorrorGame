@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class TurnOffLightsOnTrigger : MonoBehaviour
 {
     public AudioSource audiosource;
+    public FlashlightController flashlight;
     public AudioClip audioclip;
     public AudioClip drone;
 
@@ -18,7 +19,9 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
 
             // Отключаем или уничтожаем триггер
             DisableTrigger();
+            flashlight.IsEnabled = true;
         }
+
     }
 
     // Метод для выключения всех источников света с тегом "Light"

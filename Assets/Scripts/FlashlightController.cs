@@ -14,7 +14,7 @@ public class FlashlightController : MonoBehaviour
     public bool IsOn { get; private set; }
     private readonly float _speed = 5f;
 
-    public bool IsEnabled = true;
+    public bool IsEnabled = false;
 
 
     private void Awake()
