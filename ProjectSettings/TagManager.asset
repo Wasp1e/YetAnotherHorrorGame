@@ -8,6 +8,8 @@ TagManager:
   - Stone
   - Grass
   - Wood
+  - Light
+  - Cylinder
   layers:
   - Default
   - TransparentFX
