@@ -543,35 +543,35 @@ PrefabInstance:
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: stoneRunningFootstepSounds.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 7e3fdec4de0700749b02c41da4f867df, type: 3}
+      objectReference: {fileID: 8300000, guid: ddcfacdf3a4e320438420a8df13dccfd, type: 3}
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: stoneRunningFootstepSounds.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 7e76000a4a9112c498faa8f774a4fccf, type: 3}
+      objectReference: {fileID: 8300000, guid: e1ee1bcadbe2a4a4ba35281fa70ba633, type: 3}
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: stoneRunningFootstepSounds.Array.data[2]
       value: 
-      objectReference: {fileID: 8300000, guid: d3ee86b4ccc0d604a9b6e8d01e883d29, type: 3}
+      objectReference: {fileID: 8300000, guid: bbd4385154e9fcc4f83db6a647b77eec, type: 3}
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: stoneRunningFootstepSounds.Array.data[3]
       value: 
-      objectReference: {fileID: 8300000, guid: 0f12f2836a1465943be0bbb1e5e927ba, type: 3}
+      objectReference: {fileID: 8300000, guid: 0f8c3aeeb357d1e4e9367d7e9bf0329b, type: 3}
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: stoneWalkingFootstepSounds.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 7e3fdec4de0700749b02c41da4f867df, type: 3}
+      objectReference: {fileID: 8300000, guid: ddcfacdf3a4e320438420a8df13dccfd, type: 3}
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: stoneWalkingFootstepSounds.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 7e76000a4a9112c498faa8f774a4fccf, type: 3}
+      objectReference: {fileID: 8300000, guid: e1ee1bcadbe2a4a4ba35281fa70ba633, type: 3}
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: stoneWalkingFootstepSounds.Array.data[2]
       value: 
-      objectReference: {fileID: 8300000, guid: d3ee86b4ccc0d604a9b6e8d01e883d29, type: 3}
+      objectReference: {fileID: 8300000, guid: bbd4385154e9fcc4f83db6a647b77eec, type: 3}
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: stoneWalkingFootstepSounds.Array.data[3]
       value: 
-      objectReference: {fileID: 8300000, guid: 0f12f2836a1465943be0bbb1e5e927ba, type: 3}
+      objectReference: {fileID: 8300000, guid: 0f8c3aeeb357d1e4e9367d7e9bf0329b, type: 3}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
@@ -4008,7 +4008,7 @@ GameObject:
   - component: {fileID: 500304088}
   m_Layer: 0
   m_Name: groundtiles (2)
-  m_TagString: Untagged
+  m_TagString: Stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -4379,7 +4379,7 @@ GameObject:
   - component: {fileID: 509969131}
   m_Layer: 0
   m_Name: groundtiles (4)
-  m_TagString: Untagged
+  m_TagString: Stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -5676,7 +5676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.05
+      value: 1.0500002
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6964,7 +6964,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867762262}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 47.08, y: 1.0270004, z: 49.82}
+  m_LocalPosition: {x: 52.37, y: 6.55, z: 129.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 77858806}
@@ -9373,7 +9373,7 @@ GameObject:
   - component: {fileID: 1320705257}
   m_Layer: 0
   m_Name: groundtiles (1)
-  m_TagString: Untagged
+  m_TagString: Stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -10642,7 +10642,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.097
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -11636,7 +11636,7 @@ GameObject:
   - component: {fileID: 1812699324}
   m_Layer: 0
   m_Name: groundtiles (3)
-  m_TagString: Untagged
+  m_TagString: Stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13356,7 +13356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.05
+      value: 1.0500002
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13888,6 +13888,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audiosource: {fileID: 1594265461}
   audioclip: {fileID: 8300000, guid: 1a7a8415219bdee44817081f9f9efe07, type: 3}
+  drone: {fileID: 8300000, guid: 94acef2f9f0ff8944a636a39589660ae, type: 3}
 --- !u!1 &2141172109
 GameObject:
   m_ObjectHideFlags: 0
@@ -13902,7 +13903,7 @@ GameObject:
   - component: {fileID: 2141172110}
   m_Layer: 0
   m_Name: groundtiles
-  m_TagString: Untagged
+  m_TagString: Stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

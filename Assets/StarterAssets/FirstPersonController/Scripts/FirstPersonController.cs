@@ -187,6 +187,7 @@ namespace StarterAssets
 			if (Physics.Raycast(transform.position, Vector3.down, out hit, GroundedOffset + 0.1f, GroundLayers))
 			{
 				// Возвращаем тег поверхности
+				Debug.Log(hit.collider.tag);
 				return hit.collider.tag;
 			}
 			return "Default"; // Если поверхность не определена

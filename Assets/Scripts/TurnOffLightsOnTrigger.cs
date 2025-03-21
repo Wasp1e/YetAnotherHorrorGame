@@ -1,9 +1,11 @@
 using UnityEngine;
-
+using System.Collections;
+using System.Collections.Generic;
 public class TurnOffLightsOnTrigger : MonoBehaviour
 {
     public AudioSource audiosource;
     public AudioClip audioclip;
+    public AudioClip drone;
 
     // Метод, который вызывается при входе другого коллайдера в триггер
     private void OnTriggerEnter(Collider other)
@@ -29,7 +31,8 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
         // Если объекты найдены
         if (lightObjects.Length > 0)
         {
-            audiosource.PlayOneShot(audioclip, 0.7f);
+            audiosource.PlayOneShot(audioclip, 0.85f);
+            PlaySoundWithDelay();
 
             // Проходим по каждому объекту
             foreach (GameObject lightObject in lightObjects)
@@ -63,12 +66,27 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
     }
 
     // Метод для отключения или уничтожения триггера
+    // Метод для воспроизведения звука с задержкой
+    private void PlaySoundWithDelay()
+    {
+        if (audiosource != null && drone != null)
+        {
+            audiosource.clip = drone;
+            audiosource.PlayDelayed(3f);
+            audiosource.volume = 0.1f;
+            audiosource.loop = true;
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource или AudioClip не назначены.");
+        }
+    }
     private void DisableTrigger()
     {
         // Отключаем объект, на котором находится этот скрипт
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
 
         // Или уничтожаем объект (если он больше не нужен в сцене)
-        // Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
