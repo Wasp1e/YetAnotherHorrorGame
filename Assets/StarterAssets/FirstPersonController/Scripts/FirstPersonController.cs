@@ -70,6 +70,16 @@ namespace StarterAssets
 		public AudioClip[] walkingFootstepSounds; // Звуки шагов при ходьбе
 		[Tooltip("Array of running footstep sounds")]
 		public AudioClip[] runningFootstepSounds; // Звуки шагов при беге
+		[Header("Footstep Sounds by Surface")]
+		public AudioClip[] stoneWalkingFootstepSounds; // Звуки шагов по камню
+		[Tooltip("Array of running footstep sounds on stone")]
+		public AudioClip[] stoneRunningFootstepSounds; // Звуки бега по камню
+
+		[Tooltip("Array of walking footstep sounds on wood")]
+		public AudioClip[] woodWalkingFootstepSounds; // Звуки шагов по дереву
+		[Tooltip("Array of running footstep sounds on wood")]
+		public AudioClip[] woodRunningFootstepSounds; // Звуки бега по дереву
+
 		[Tooltip("Delay between footsteps when walking")]
 		public float walkingFootstepDelay = 0.5f; // Задержка между шагами при ходьбе
 		[Tooltip("Delay between footsteps when running")]
@@ -95,9 +105,7 @@ namespace StarterAssets
 		public AudioClip outOfBreathSound; // Звук одышки
 		[Tooltip("Volume of the out of breath sound")]
 		[Range(0, 1)] public float outOfBreathVolume = 1f; // Громкость звука
-
-		private bool _hasPlayedOutOfBreathSound = false; // Флаг, чтобы звук не воспроизводился повторно
-
+		private bool _hasPlayedOutOfBreathSound = false; // Флаг, чтобы звук не воспроизводился повторн
 
 			
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -173,6 +181,16 @@ namespace StarterAssets
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
 		}
 
+		private string GetSurfaceType()
+		{
+			RaycastHit hit;
+			if (Physics.Raycast(transform.position, Vector3.down, out hit, GroundedOffset + 0.1f, GroundLayers))
+			{
+				// Возвращаем тег поверхности
+				return hit.collider.tag;
+			}
+			return "Default"; // Если поверхность не определена
+		}
 		private void CameraRotation()
 		{
 			// if there is an input
@@ -249,18 +267,52 @@ namespace StarterAssets
 				{
 					if (_input.sprint && currentStamina > 0 && !_isExhausted) // Если игрок бежит
 					{
-						PlayFootstepSound(runningFootstepSounds, runningFootstepDelay);
+						PlayFootstepSound(runningFootstepDelay);
 					}
 					else // Если игрок идет
 					{
-						PlayFootstepSound(walkingFootstepSounds, walkingFootstepDelay);
+						PlayFootstepSound(walkingFootstepDelay);
 					}
 				}
 			}
 		}
-		private void PlayFootstepSound(AudioClip[] footstepSounds, float delay)
+		private void PlayFootstepSound(float delay)
 		{
-			if (footstepSounds.Length > 0 && _audioSource != null)
+			string surfaceType = GetSurfaceType();
+			AudioClip[] footstepSounds = null;
+
+			if (_input.sprint && currentStamina > 0 && !_isExhausted) // Если игрок бежит
+			{
+				switch (surfaceType)
+				{
+					case "Stone":
+						footstepSounds = stoneRunningFootstepSounds;
+						break;
+					case "Wood":
+						footstepSounds = woodRunningFootstepSounds;
+						break;
+					default:
+						footstepSounds = runningFootstepSounds; // По умолчанию
+						break;
+				}
+			}
+			else // Если игрок идет
+			{
+				switch (surfaceType)
+				{
+					case "Stone":
+						footstepSounds = stoneWalkingFootstepSounds;
+						break;
+					case "Wood":
+						footstepSounds = woodWalkingFootstepSounds;
+						break;
+					default:
+						footstepSounds = walkingFootstepSounds; // По умолчанию
+						break;
+				}
+			}
+
+			if (footstepSounds != null && footstepSounds.Length > 0 && _audioSource != null)
 			{
 				int index = Random.Range(0, footstepSounds.Length); // Случайный выбор звука
 				_audioSource.PlayOneShot(footstepSounds[index]); // Воспроизведение звука
