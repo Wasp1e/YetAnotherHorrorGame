@@ -7,7 +7,7 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
     public FlashlightController flashlight;
     public AudioClip audioclip;
     public AudioClip drone;
-    public float fadeInDuration = 3f; // Длительность плавного появления звука
+    public float fadeInDuration = 5f; // Длительность плавного появления звука
 
 
     // Метод, который вызывается при входе другого коллайдера в триггер
@@ -93,7 +93,7 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
         {
             timer += Time.deltaTime;
             // Плавно увеличиваем громкость и ограничиваем её диапазоном [0, 1]
-            audiosource.volume = Mathf.Clamp01(Mathf.Lerp(0f, 1f, timer / fadeInDuration));
+            audiosource.volume = Mathf.Clamp01(Mathf.Lerp(0f, 0.1f, timer / fadeInDuration));
             yield return null; // Ждем следующий кадр
         }
 
