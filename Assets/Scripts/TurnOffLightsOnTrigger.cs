@@ -7,6 +7,8 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
     public FlashlightController flashlight;
     public AudioClip audioclip;
     public AudioClip drone;
+    public float fadeInDuration = 3f; // Длительность плавного появления звука
+
 
     // Метод, который вызывается при входе другого коллайдера в триггер
     private void OnTriggerEnter(Collider other)
@@ -18,7 +20,6 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
             TurnOffLightsWithTag();
 
             // Отключаем или уничтожаем триггер
-            DisableTrigger();
             flashlight.IsEnabled = true;
         }
 
@@ -36,6 +37,7 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
         {
             audiosource.PlayOneShot(audioclip, 0.85f);
             PlaySoundWithDelay();
+            StartCoroutine(FadeIn());
 
             // Проходим по каждому объекту
             foreach (GameObject lightObject in lightObjects)
@@ -74,9 +76,7 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
         if (audiosource != null && drone != null)
         {
             audiosource.clip = drone;
-            audiosource.volume = 0f;
-            audiosource.PlayDelayed(0f);
-            StartCoroutine(easeIn());
+            audiosource.PlayDelayed(1f);
             audiosource.loop = true;
         }
         else
@@ -84,13 +84,20 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
             Debug.LogWarning("AudioSource или AudioClip не назначены.");
         }
     }
-    private IEnumerator easeIn()
+
+    IEnumerator FadeIn()
     {
-        while (audiosource.volume <= 0.1f)
+        float timer = 0f;
+
+        while (timer < fadeInDuration)
         {
-            audiosource.volume += 0.01f;
-            yield return new WaitForSeconds(0.5f);
+            timer += Time.deltaTime;
+            // Плавно увеличиваем громкость и ограничиваем её диапазоном [0, 1]
+            audiosource.volume = Mathf.Clamp01(Mathf.Lerp(0f, 1f, timer / fadeInDuration));
+            yield return null; // Ждем следующий кадр
         }
+
+        DisableTrigger();
     }
     private void DisableTrigger()
     {
