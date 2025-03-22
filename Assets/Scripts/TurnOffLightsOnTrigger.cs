@@ -74,13 +74,22 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
         if (audiosource != null && drone != null)
         {
             audiosource.clip = drone;
-            audiosource.PlayDelayed(3f);
-            audiosource.volume = 0.1f;
+            audiosource.volume = 0f;
+            audiosource.PlayDelayed(0f);
+            StartCoroutine(easeIn());
             audiosource.loop = true;
         }
         else
         {
             Debug.LogWarning("AudioSource или AudioClip не назначены.");
+        }
+    }
+    private IEnumerator easeIn()
+    {
+        while (audiosource.volume <= 0.1f)
+        {
+            audiosource.volume += 0.01f;
+            yield return new WaitForSeconds(0.5f);
         }
     }
     private void DisableTrigger()

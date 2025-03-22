@@ -12,13 +12,14 @@ public class Doors : MonoBehaviour
 
     public AudioSource openSound;
     public AudioSource closeSound;
-    // public AudioSource lockedSound;
+    public AudioSource lockedSound;
     // public AudioSource unlockedSound;
 
     private bool inReach;
     private bool doorisOpen;
     private bool doorisClosed;
     public bool locked;
+    public bool lockedlocked;
     public bool unlocked;
 
 
@@ -70,13 +71,13 @@ public class Doors : MonoBehaviour
         //     locked = false;
         // }
 
-        if (inReach && Input.GetButtonDown("Interact"))
+        if (inReach && !lockedlocked && Input.GetButtonDown("Interact"))
         {
             locked = false;
             StartCoroutine(unlockDoor());
         }
 
-        if (inReach && doorisClosed && unlocked && Input.GetButtonDown("Interact"))
+        if (inReach && !lockedlocked && doorisClosed && unlocked && Input.GetButtonDown("Interact"))
         {
             door.SetBool("Open", true);
             door.SetBool("Closed", false);
@@ -85,13 +86,16 @@ public class Doors : MonoBehaviour
             doorisClosed = false;
         }
 
-        else if (inReach && doorisOpen && unlocked && Input.GetButtonDown("Interact"))
+        else if (inReach && !lockedlocked && doorisOpen && unlocked && Input.GetButtonDown("Interact"))
         {
             door.SetBool("Open", false);
             door.SetBool("Closed", true);
             closeSound.Play();
             doorisClosed = true;
             doorisOpen = false;
+        }
+        else if (inReach && lockedlocked && Input.GetButtonDown("Interact")) {
+            lockedSound.Play();
         }
 
 
