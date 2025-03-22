@@ -48,7 +48,6 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
                 if (lightComponent != null)
                 {
                     lightComponent.enabled = false;
-                    Debug.Log("Источник света " + lightObject.name + " выключен.");
                 }
                 if (audioComponent != null)
                 {

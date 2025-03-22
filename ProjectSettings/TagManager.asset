@@ -10,6 +10,7 @@ TagManager:
   - Wood
   - Light
   - Cylinder
+  - Reach
   layers:
   - Default
   - TransparentFX
