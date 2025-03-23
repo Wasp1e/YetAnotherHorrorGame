@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: open
+  m_Name: OpenForward
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -27,7 +27,7 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.33333334
+        time: 0.25
         value: {x: 0, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
@@ -36,6 +36,7 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
+<<<<<<< Updated upstream:Assets/Animations/Door/open.anim
         time: 1.3333334
         value: {x: 0, y: 120, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
@@ -73,6 +74,10 @@ AnimationClip:
       - serializedVersion: 3
         time: 1.3333334
         value: {x: 81.427, y: 16.33, z: 134.857}
+=======
+        time: 1.1666666
+        value: {x: 0, y: 110, z: 0}
+>>>>>>> Stashed changes:Assets/Animations/Door/OpenForward.anim
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -83,6 +88,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     path: 
+<<<<<<< Updated upstream:Assets/Animations/Door/open.anim
   m_ScaleCurves:
   - curve:
       serializedVersion: 2
@@ -118,6 +124,10 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     path: 
+=======
+  m_PositionCurves: []
+  m_ScaleCurves: []
+>>>>>>> Stashed changes:Assets/Animations/Door/OpenForward.anim
   m_FloatCurves: []
   m_PPtrCurves: []
   m_SampleRate: 60
@@ -134,6 +144,7 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+<<<<<<< Updated upstream:Assets/Animations/Door/open.anim
     - serializedVersion: 2
       path: 0
       attribute: 1
@@ -148,6 +159,8 @@ AnimationClip:
       typeID: 4
       customType: 0
       isPPtrCurve: 0
+=======
+>>>>>>> Stashed changes:Assets/Animations/Door/OpenForward.anim
     pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -294,6 +307,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
+<<<<<<< Updated upstream:Assets/Animations/Door/open.anim
         time: 0.33333334
         value: 0
         inSlope: 0
@@ -304,6 +318,9 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.3333334
+=======
+        time: 0.25
+>>>>>>> Stashed changes:Assets/Animations/Door/OpenForward.anim
         value: 0
         inSlope: 0
         outSlope: 0
@@ -331,7 +348,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33333334
+        time: 0.25
         value: 0
         inSlope: 0
         outSlope: 0
@@ -340,8 +357,13 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
+<<<<<<< Updated upstream:Assets/Animations/Door/open.anim
         time: 1.3333334
         value: 120
+=======
+        time: 1.1666666
+        value: 110
+>>>>>>> Stashed changes:Assets/Animations/Door/OpenForward.anim
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -368,6 +390,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
+<<<<<<< Updated upstream:Assets/Animations/Door/open.anim
         time: 0.33333334
         value: 0
         inSlope: 0
@@ -378,6 +401,9 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.3333334
+=======
+        time: 0.25
+>>>>>>> Stashed changes:Assets/Animations/Door/OpenForward.anim
         value: 0
         inSlope: 0
         outSlope: 0
@@ -392,6 +418,7 @@ AnimationClip:
     path: 
     classID: 4
     script: {fileID: 0}
+<<<<<<< Updated upstream:Assets/Animations/Door/open.anim
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -503,6 +530,8 @@ AnimationClip:
     path: 
     classID: 4
     script: {fileID: 0}
+=======
+>>>>>>> Stashed changes:Assets/Animations/Door/OpenForward.anim
   m_EulerEditorCurves:
   - curve:
       serializedVersion: 2

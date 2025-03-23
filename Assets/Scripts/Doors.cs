@@ -58,7 +58,27 @@ public class Doors : MonoBehaviour
         Vector3 toPlayer = player.position - transform.position;
         float dot = Vector3.Dot(transform.forward, toPlayer.normalized);
 
+<<<<<<< Updated upstream
         if (dot > 0)
+=======
+    private void OpenDoor()
+    {
+        // Направление от двери к игроку
+        Vector3 doorToPlayer = player.position - transform.position;
+        doorToPlayer.y = 0; // Игнорируем разницу по высоте
+        doorToPlayer.Normalize(); // Нормализуем вектор
+
+        // Направление двери (предполагаем, что дверь изначально ориентирована правильно)
+        Vector3 doorForward = transform.forward;
+        doorForward.y = 0; // Игнорируем разницу по высоте
+        doorForward.Normalize(); // Нормализуем вектор
+
+        // Угол между направлением двери и направлением к игроку
+        float angle = Vector3.SignedAngle(doorForward, doorToPlayer, Vector3.up);
+
+        // Определяем, в какую сторону открывать дверь
+        if (Mathf.Abs(angle) > 90)
+>>>>>>> Stashed changes
         {
             door.SetBool("OpenForward", true);
         }
