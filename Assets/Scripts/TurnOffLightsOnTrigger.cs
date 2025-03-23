@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class TurnOffLightsOnTrigger : MonoBehaviour
 {
     public AudioSource audiosource;
+    public AudioSource audioSource2;
     public FlashlightController flashlight;
     public AudioClip audioclip;
     private bool hasTriggered = false;
@@ -18,7 +19,7 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
         if (other.CompareTag("Player") && !hasTriggered)
         {
             hasTriggered = true;
-            audiosource.PlayOneShot(audioclip, 0.85f);
+            audioSource2.PlayOneShot(audioclip, 0.85f);
             PlaySoundWithDelay();
             StartCoroutine(FadeIn());
             // Выключаем все источники света с тегом "Light"
