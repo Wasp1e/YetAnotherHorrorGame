@@ -183,14 +183,14 @@ namespace StarterAssets
 
 		private string GetSurfaceType()
 		{
-			RaycastHit hit;
-			if (Physics.Raycast(transform.position, Vector3.down, out hit, GroundedOffset + 0.1f, GroundLayers))
+			Collider[] colliders = Physics.OverlapSphere(transform.position, GroundedOffset, GroundLayers);
+			Debug.Log(Physics.OverlapSphere(transform.position, GroundedOffset, GroundLayers));
+			if (colliders.Length > 0)
 			{
-				// Возвращаем тег поверхности
-				Debug.Log(hit.collider.tag);
-				return hit.collider.tag;
+				Debug.Log("Detected object: " + colliders[0].name);
+				return colliders[0].tag;
 			}
-			return "Default"; // Если поверхность не определена
+			return "Default";
 		}
 		private void CameraRotation()
 		{
@@ -280,6 +280,7 @@ namespace StarterAssets
 		private void PlayFootstepSound(float delay)
 		{
 			string surfaceType = GetSurfaceType();
+			Debug.Log("" + surfaceType);
 			AudioClip[] footstepSounds = null;
 
 			if (_input.sprint && currentStamina > 0 && !_isExhausted) // Если игрок бежит
