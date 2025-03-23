@@ -1,39 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Doors : MonoBehaviour
 {
-
     public Animator door;
-    // public GameObject lockOB;
-    // public GameObject keyOB;
-
-
-    public AudioSource openSound;
-    public AudioSource closeSound;
-    public AudioSource lockedSound;
-    // public AudioSource unlockedSound;
-
+    private AudioSource openSound;
+    private AudioSource closeSound;
     private bool inReach;
     private bool doorisOpen;
-    private bool doorisClosed;
-    public bool locked;
-    public bool lockedlocked;
-    public bool unlocked;
+    private Transform player; // Получаем игрока
 
+    void Awake()
+    {
+        openSound = GameObject.Find("Player/Sounds/DoorOpen").GetComponent<AudioSource>();
+        closeSound = GameObject.Find("Player/Sounds/DoorClose").GetComponent<AudioSource>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
-
-
+    void Start()
+    {
+        inReach = false;
+        doorisOpen = false;
+    }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Reach" && doorisClosed)
-        {
-            inReach = true;
-        }
-
-        if (other.gameObject.tag == "Reach" && doorisOpen)
+        if (other.CompareTag("Reach"))
         {
             inReach = true;
         }
@@ -41,75 +32,50 @@ public class Doors : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Reach")
+        if (other.CompareTag("Reach"))
         {
             inReach = false;
         }
     }
 
-    void Start()
-    {
-        inReach = false;
-        doorisClosed = true;
-        doorisOpen = false;
-    }
-
-
-
-
     void Update()
     {
-        // if (lockOB.activeInHierarchy)
-        // {
-        //     locked = true;
-        //     unlocked = false;
-        // }
-
-        // else
-        // {
-        //     unlocked = true;
-        //     locked = false;
-        // }
-
-        if (inReach && !lockedlocked && Input.GetButtonDown("Interact"))
+        if (inReach && Input.GetButtonDown("Interact"))
         {
-            locked = false;
-            StartCoroutine(unlockDoor());
+            if (!doorisOpen)
+            {
+                OpenDoor();
+            }
+            else
+            {
+                CloseDoor();
+            }
         }
-
-        if (inReach && !lockedlocked && doorisClosed && unlocked && Input.GetButtonDown("Interact"))
-        {
-            door.SetBool("Open", true);
-            door.SetBool("Closed", false);
-            openSound.Play();
-            doorisOpen = true;
-            doorisClosed = false;
-        }
-
-        else if (inReach && !lockedlocked && doorisOpen && unlocked && Input.GetButtonDown("Interact"))
-        {
-            door.SetBool("Open", false);
-            door.SetBool("Closed", true);
-            closeSound.Play();
-            doorisClosed = true;
-            doorisOpen = false;
-        }
-        else if (inReach && lockedlocked && Input.GetButtonDown("Interact")) {
-            lockedSound.Play();
-        }
-
-
     }
 
-    IEnumerator unlockDoor()
+    void OpenDoor()
     {
-        yield return new WaitForSeconds(.05f);
+        Vector3 toPlayer = player.position - transform.position;
+        float dot = Vector3.Dot(transform.forward, toPlayer.normalized);
+
+        if (dot > 0)
         {
-            unlocked = true;
+            door.SetBool("OpenForward", true);
         }
+        else
+        {
+            door.SetBool("OpenBackward", true);
+        }
+
+        openSound.Play();
+        doorisOpen = true;
     }
 
-
-
-
+    void CloseDoor()
+    {
+        door.SetBool("OpenForward", false);
+        door.SetBool("OpenBackward", false);
+        closeSound.Play();
+        doorisOpen = false;
+    }
 }
