@@ -10,7 +10,7 @@ public class LightsFlicker : MonoBehaviour
     public float minTime;
     public float maxTime;
     public float timer;
-    public bool isOn = false;
+    public static bool isOn = false;
     void Start()
     {
         if (isOn)

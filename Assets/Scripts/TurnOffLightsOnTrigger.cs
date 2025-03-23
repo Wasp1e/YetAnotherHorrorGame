@@ -4,27 +4,42 @@ using System.Collections.Generic;
 public class TurnOffLightsOnTrigger : MonoBehaviour
 {
     public AudioSource audiosource;
+    public AudioSource audioSource2;
     public FlashlightController flashlight;
     public AudioClip audioclip;
+    private bool hasTriggered = false;
     public AudioClip drone;
+    private Hint hintScript;
     public float fadeInDuration = 5f; // Длительность плавного появления звука
 
-
+    void Start()
+    {
+        GameObject hintObject = GameObject.FindGameObjectWithTag("Hint");
+        if (hintObject != null)
+        {
+            hintScript = hintObject.GetComponent<Hint>();
+        }
+    }
     // Метод, который вызывается при входе другого коллайдера в триггер
     private void OnTriggerEnter(Collider other)
     {
         // Проверяем, если объект, вошедший в триггер, имеет тег "Player"
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasTriggered)
         {
+            hasTriggered = true;
+            audioSource2.PlayOneShot(audioclip, 0.85f);
+            PlaySoundWithDelay();
+            StartCoroutine(FadeIn());
             // Выключаем все источники света с тегом "Light"
             TurnOffLightsWithTag();
 
             // Отключаем или уничтожаем триггер
             flashlight.IsEnabled = true;
+
+            hintScript.ShowHint("Press F to use Flashlight", 2f);
         }
 
     }
-
     // Метод для выключения всех источников света с тегом "Light"
     private void TurnOffLightsWithTag()
     {
@@ -35,13 +50,10 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
         // Если объекты найдены
         if (lightObjects.Length > 0)
         {
-            audiosource.PlayOneShot(audioclip, 0.85f);
-            PlaySoundWithDelay();
-            StartCoroutine(FadeIn());
-
             // Проходим по каждому объекту
             foreach (GameObject lightObject in lightObjects)
             {
+                LightsFlicker.isOn = false;
                 AudioSource audioComponent = lightObject.GetComponent<AudioSource>();
                 // Получаем компонент Light
                 Light lightComponent = lightObject.GetComponent<Light>();
@@ -76,7 +88,7 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
         if (audiosource != null && drone != null)
         {
             audiosource.clip = drone;
-            audiosource.PlayDelayed(1f);
+            audiosource.PlayDelayed(0f);
             audiosource.loop = true;
         }
         else
@@ -97,14 +109,13 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
             yield return null; // Ждем следующий кадр
         }
 
-        DisableTrigger();
     }
     private void DisableTrigger()
     {
         // Отключаем объект, на котором находится этот скрипт
-        // gameObject.SetActive(false);
+        gameObject.SetActive(false);
 
         // Или уничтожаем объект (если он больше не нужен в сцене)
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
 }

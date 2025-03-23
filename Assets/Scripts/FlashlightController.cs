@@ -12,7 +12,7 @@ public class FlashlightController : MonoBehaviour
     private Vector3 _offset;
 
     public bool IsOn { get; private set; }
-    private readonly float _speed = 5f;
+    private readonly float _speed = 25f;
 
     public bool IsEnabled = false;
 

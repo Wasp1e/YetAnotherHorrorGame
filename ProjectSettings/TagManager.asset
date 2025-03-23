@@ -11,11 +11,12 @@ TagManager:
   - Light
   - Cylinder
   - Reach
+  - Hint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
