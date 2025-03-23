@@ -6,6 +6,7 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
     public AudioSource audiosource;
     public FlashlightController flashlight;
     public AudioClip audioclip;
+    private bool hasTriggered = false;
     public AudioClip drone;
     public float fadeInDuration = 5f; // Длительность плавного появления звука
 
@@ -14,8 +15,12 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Проверяем, если объект, вошедший в триггер, имеет тег "Player"
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasTriggered)
         {
+            hasTriggered = true;
+            audiosource.PlayOneShot(audioclip, 0.85f);
+            PlaySoundWithDelay();
+            StartCoroutine(FadeIn());
             // Выключаем все источники света с тегом "Light"
             TurnOffLightsWithTag();
 
@@ -35,10 +40,6 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
         // Если объекты найдены
         if (lightObjects.Length > 0)
         {
-            audiosource.PlayOneShot(audioclip, 0.85f);
-            PlaySoundWithDelay();
-            StartCoroutine(FadeIn());
-
             // Проходим по каждому объекту
             foreach (GameObject lightObject in lightObjects)
             {
@@ -76,7 +77,7 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
         if (audiosource != null && drone != null)
         {
             audiosource.clip = drone;
-            audiosource.PlayDelayed(1f);
+            audiosource.PlayDelayed(0f);
             audiosource.loop = true;
         }
         else
@@ -96,15 +97,15 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
             audiosource.volume = Mathf.Clamp01(Mathf.Lerp(0f, 0.1f, timer / fadeInDuration));
             yield return null; // Ждем следующий кадр
         }
-
         DisableTrigger();
+
     }
     private void DisableTrigger()
     {
         // Отключаем объект, на котором находится этот скрипт
-        // gameObject.SetActive(false);
+        gameObject.SetActive(false);
 
         // Или уничтожаем объект (если он больше не нужен в сцене)
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
 }

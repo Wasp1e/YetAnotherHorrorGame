@@ -10,9 +10,9 @@ public class Doors : MonoBehaviour
     // public GameObject keyOB;
 
 
-    public AudioSource openSound;
-    public AudioSource closeSound;
-    public AudioSource lockedSound;
+    private AudioSource openSound;
+    private AudioSource closeSound;
+    private AudioSource lockedSound;
     // public AudioSource unlockedSound;
 
     private bool inReach;
@@ -23,7 +23,15 @@ public class Doors : MonoBehaviour
     public bool unlocked;
 
 
-
+    void Awake()
+    {
+        GameObject doorOpenObject = GameObject.Find("Player/Sounds/DoorOpen");
+        openSound = doorOpenObject.GetComponent<AudioSource>();
+        GameObject doorCloseObject = GameObject.Find("Player/Sounds/DoorClose");
+        closeSound = doorCloseObject.GetComponent<AudioSource>();
+        GameObject doorLockedObject = GameObject.Find("Player/Sounds/DoorLocked");
+        lockedSound = doorLockedObject.GetComponent<AudioSource>();
+    }
 
 
     void OnTriggerEnter(Collider other)
