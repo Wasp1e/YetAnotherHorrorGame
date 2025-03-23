@@ -11,6 +11,7 @@ TagManager:
   - Light
   - Cylinder
   - Reach
+  - Hint
   layers:
   - Default
   - TransparentFX

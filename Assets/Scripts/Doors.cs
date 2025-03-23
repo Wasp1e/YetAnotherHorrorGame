@@ -17,10 +17,12 @@ public class Doors : MonoBehaviour
 
     private bool inReach;
     private bool doorisOpen;
+    private Hint hintScript;
     private bool doorisClosed;
     public bool locked;
     public bool lockedlocked;
     public bool unlocked;
+    public static bool interactMessageWasShown = false;
 
 
     void Awake()
@@ -32,13 +34,29 @@ public class Doors : MonoBehaviour
         GameObject doorLockedObject = GameObject.Find("Player/Sounds/DoorLocked");
         lockedSound = doorLockedObject.GetComponent<AudioSource>();
     }
-
+    void Start()
+    {
+        GameObject hintObject = GameObject.FindGameObjectWithTag("Hint");
+        if (hintObject != null)
+        {
+            hintScript = hintObject.GetComponent<Hint>();
+        }
+        inReach = false;
+        doorisClosed = true;
+        doorisOpen = false;
+    }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Reach" && doorisClosed)
         {
             inReach = true;
+            if (!interactMessageWasShown && !hintScript.hintIsActive)
+            {
+                Debug.Log("Message shown");
+                hintScript.ShowHint("E to interact", 0f);
+                interactMessageWasShown = true;
+            }
         }
 
         if (other.gameObject.tag == "Reach" && doorisOpen)
@@ -54,16 +72,6 @@ public class Doors : MonoBehaviour
             inReach = false;
         }
     }
-
-    void Start()
-    {
-        inReach = false;
-        doorisClosed = true;
-        doorisOpen = false;
-    }
-
-
-
 
     void Update()
     {

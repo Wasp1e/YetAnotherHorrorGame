@@ -9,9 +9,17 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
     public AudioClip audioclip;
     private bool hasTriggered = false;
     public AudioClip drone;
+    private Hint hintScript;
     public float fadeInDuration = 5f; // Длительность плавного появления звука
 
-
+    void Start()
+    {
+        GameObject hintObject = GameObject.FindGameObjectWithTag("Hint");
+        if (hintObject != null)
+        {
+            hintScript = hintObject.GetComponent<Hint>();
+        }
+    }
     // Метод, который вызывается при входе другого коллайдера в триггер
     private void OnTriggerEnter(Collider other)
     {
@@ -27,10 +35,11 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
 
             // Отключаем или уничтожаем триггер
             flashlight.IsEnabled = true;
+
+            hintScript.ShowHint("Press F to use Flashlight", 2f);
         }
 
     }
-
     // Метод для выключения всех источников света с тегом "Light"
     private void TurnOffLightsWithTag()
     {
@@ -44,6 +53,7 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
             // Проходим по каждому объекту
             foreach (GameObject lightObject in lightObjects)
             {
+                LightsFlicker.isOn = false;
                 AudioSource audioComponent = lightObject.GetComponent<AudioSource>();
                 // Получаем компонент Light
                 Light lightComponent = lightObject.GetComponent<Light>();
@@ -98,7 +108,6 @@ public class TurnOffLightsOnTrigger : MonoBehaviour
             audiosource.volume = Mathf.Clamp01(Mathf.Lerp(0f, 0.1f, timer / fadeInDuration));
             yield return null; // Ждем следующий кадр
         }
-        DisableTrigger();
 
     }
     private void DisableTrigger()
